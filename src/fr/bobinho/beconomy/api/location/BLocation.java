@@ -1,10 +1,12 @@
 package fr.bobinho.beconomy.api.location;
 
 import fr.bobinho.beconomy.api.validate.BValidate;
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 
 /**
  * Bobinho location library
@@ -27,12 +29,10 @@ public final class BLocation {
     public static String getAsString(@Nonnull Location location) {
         BValidate.notNull(location);
 
-        return location.getWorld().getName() + ":" +
-                location.getX() + ":" +
-                location.getY() + ":" +
-                location.getZ() + ":" +
-                location.getYaw() + ":" +
-                location.getPitch();
+        return location.getX() + ", " +
+                location.getY() + ", " +
+                location.getZ() + " (" +
+                location.getWorld().getName() + ")";
     }
 
     /**
@@ -45,14 +45,14 @@ public final class BLocation {
     public static Location getAsLocation(@Nonnull String locationString) {
         BValidate.notNull(locationString);
 
-        String[] locationInformations = locationString.split(":");
+        String[] locationInformations = StringUtils.replaceEach(locationString, new String[]{",", "(", ")"}, new String[]{"","",""}).split(" ");
         return new Location(
-                Bukkit.getWorld(locationInformations[0]),
+                Bukkit.getWorld(locationInformations[3]),
+                Double.parseDouble(locationInformations[0]),
                 Double.parseDouble(locationInformations[1]),
                 Double.parseDouble(locationInformations[2]),
-                Double.parseDouble(locationInformations[3]),
-                Float.parseFloat(locationInformations[4]),
-                Float.parseFloat(locationInformations[5])
+                0.0F,
+                0.0F
         );
     }
 

@@ -19,4 +19,18 @@ public final class BValidate {
         Validate.notNull(object, object.getClass().getCanonicalName() + " cannot be null!");
     }
 
+    /**
+     * Validates the truth expression status
+     */
+    public static void isTrue(boolean expression) {
+        Validate.isTrue(expression, "The expression cannot be false!");
+    }
+
+    /**
+     * Validates the falsehood expression status
+     */
+    public static void isFalse(boolean expression) {
+        Validate.isTrue(!expression, "The expression cannot be true!");
+    }
+
 }

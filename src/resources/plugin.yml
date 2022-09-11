@@ -3,6 +3,7 @@ main: fr.bobinho.beconomy.BEconomyCore
 version: 0.0.1
 author: Bobinho
 api-version: 1.17
+depend: [Vault]
 commands:
   cmd:
     description: commands.
